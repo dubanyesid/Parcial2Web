@@ -11,12 +11,20 @@ public class ConexionPostgreSQL implements ConexionFact {
 	private Connection con = null;
 	private static ConexionPostgreSQL conexion;
 
-	private static final String host = "queenie.db.elephantsql.com";
+	/*private static final String host = "queenie.db.elephantsql.com";
 	private static final String dbName = "mnjgxshj";
 	private static final String url = "jdbc:postgresql://" + host + ":5432/" + dbName;
 	private static final String driver = "org.postgresql.Driver";
 	private static final String userName = "mnjgxshj";
-	private static final String password = "Uzjqo00sxV0W9OzPEB1q3wpoVvGMbbUV";
+	private static final String password = "Uzjqo00sxV0W9OzPEB1q3wpoVvGMbbUV";*/
+	
+	private static final String host = "localhost";
+	private static final String dbName = "mnjgxshj";
+	private static final String url = "jdbc:postgresql://" + host + ":5432/" + dbName;
+	private static final String driver = "org.postgresql.Driver";
+	private static final String userName = "postgres";
+	private static final String password = "123";
+
 
 	public ConexionPostgreSQL() {
 		this.conectar();
@@ -72,3 +80,5 @@ public class ConexionPostgreSQL implements ConexionFact {
 
 	}
 }
+
+

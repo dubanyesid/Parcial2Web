@@ -4,7 +4,7 @@
 body {
 	  min-height: 100vh;
 	  background-size: 90%;
-	  
+	  background-color:blue;
 	  background-size: cover;
 	  background-repeat: no-repeat;
 	  background-position: center;
@@ -19,9 +19,6 @@ body {
 #boton:hover{
 	 background-color:#ff02b3;
 	 border-color: #8b2c6f; 
-}
-#menu{
-	background-color:#eb81cbd8;
 }
 
 .cuadroPrincipal {

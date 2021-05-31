@@ -7,6 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -58,17 +59,17 @@
 				</thead>
 				<tbody>
 					<!--   for (Todo todo: todos) {  -->
-					<c:forEach var="ciclista" items="${lista}">
+					<c:forEach var="candidato" items="${lista}">
 						<tr>
-							<td><c:out value="${ciclista.id}" /></td>
-							<td><c:out value="${ciclista.nombre}" /></td>
-							<td><c:out value="${ciclista.email}" /></td>
-							<td><c:out value="${ciclista.birthdate}" /></td>
-							<td><c:out value="${ciclista.pais}" /></td>
-							<td><c:out value="${ciclista.equipo}" /></td>
+							<td><c:out value="${candidato.id}" /></td>
+							<td><c:out value="${candidato.documento}" /></td>
+							<td><c:out value="${candidato.nombre}" /></td>
+							<td><c:out value="${candidato.apellido}" /></td>
+							<td><c:out value="${candidato.eleccion}" /></td>
+							<td><c:out value="${candidato.numero}" /></td>
 							<td><a
-								href="<%=request.getContextPath()%>/CiclistaServlet?action=showedit&id=<c:out value="${ciclista.id}" />">Editar</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-								href="CiclistaServlet?action=eliminar&id=<c:out value="${ciclista.id}"/>">Eliminar</a>
+								href="<%=request.getContextPath()%>/CandidatoController?action=showedit&id=<c:out value="${candidato.id}" />">Editar</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+								href="CandidatoController?action=eliminar&id=<c:out value="${candidato.id}"/>">Eliminar</a>
 							</td>
 
 						</tr>

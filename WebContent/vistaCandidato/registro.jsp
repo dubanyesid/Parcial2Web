@@ -71,7 +71,7 @@
 					</div>
 					<div class="form-group">
 						<label for="validation01">Número</label> <input type="text"
-							class="form-control" placeholder="Fecha Nacimiento" name="numero">
+							class="form-control" placeholder="Número" name="numero">
 					</div>
 						<input type="submit" class="btn btn-success" value="Agregar"
 							name="agregar">

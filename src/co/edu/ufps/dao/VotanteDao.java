@@ -14,11 +14,11 @@ import co.edu.ufps.util.Conexion;
 public class VotanteDao {
 	private Conexion con;
 	private Connection conection;
-	private static final String INSERTAR_CANDIDATO_SQL = "INSERT INTO candidato(id,documento,nombre,apellido,eleccion,numero) VALUES (?,?,?,?,?,?)";
-	private static final String ELIMINAR_CANDIDATO_SQL = "DELETE FROM candidato WHERE id=?";
-	private static final String ACTUALIZAR_CANDIDATO_SQL = "UPDATE candidato SET documento=?,nombre=?,apellido=?,eleccion=?,numero=? WHERE id=?";
-	private static final String BUSCAR_CANDIDATO_SQL = "SELECT * FROM candidato WHERE id=?";
-	private static final String LISTAR_CANDIDATO_SQL = "SELECT * FROM candidato";
+	private static final String INSERTAR_VOTANTE_SQL = "INSERT INTO votante(id,documento,nombre,apellido,eleccion,numero) VALUES (?,?,?,?,?,?)";
+	private static final String ELIMINAR_VOTANTE_SQL = "DELETE FROM votante WHERE id=?";
+	private static final String ACTUALIZAR_VOTANTE_SQL = "UPDATE votante SET documento=?,nombre=?,apellido=?,eleccion=?,numero=? WHERE id=?";
+	private static final String BUSCAR_VOTANTE_SQL = "SELECT * FROM votante WHERE id=?";
+	private static final String LISTAR_VOTANTE_SQL = "SELECT * FROM votante";
 
 	public VotanteDao() throws SQLException {
 		this.con = new Conexion();
@@ -30,7 +30,7 @@ public class VotanteDao {
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
-		PreparedStatement prepared = this.conection.prepareStatement(INSERTAR_CANDIDATO_SQL);
+		PreparedStatement prepared = this.conection.prepareStatement(INSERTAR_VOTANTE_SQL);
 		prepared.setInt(1, c.getId());
 		prepared.setString(2, c.getDocumento());
 		prepared.setString(3, c.getNombre());
@@ -51,7 +51,7 @@ public class VotanteDao {
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
-		PreparedStatement prepared = this.conection.prepareStatement(ACTUALIZAR_CANDIDATO_SQL);
+		PreparedStatement prepared = this.conection.prepareStatement( ACTUALIZAR_VOTANTE_SQL);
 		prepared.setInt(1, c.getId());
 		prepared.setString(2, c.getDocumento());
 		prepared.setString(3, c.getNombre());
@@ -72,7 +72,7 @@ public class VotanteDao {
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
-		PreparedStatement prepared = this.conection.prepareStatement(BUSCAR_CANDIDATO_SQL);
+		PreparedStatement prepared = this.conection.prepareStatement(BUSCAR_VOTANTE_SQL);
 		prepared.setInt(1, id);
 
 		ResultSet rs = prepared.executeQuery();
@@ -94,7 +94,7 @@ public class VotanteDao {
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
-		PreparedStatement prepared = this.conection.prepareStatement(ELIMINAR_CANDIDATO_SQL);
+		PreparedStatement prepared = this.conection.prepareStatement(ELIMINAR_VOTANTE_SQL);
 		prepared.setInt(1, id);
 
 		rowElimined = prepared.executeUpdate() > 0;
@@ -111,7 +111,7 @@ public class VotanteDao {
 		this.conection = this.con.conectar();
 
 		Statement statement = this.conection.createStatement();
-		ResultSet rs = statement.executeQuery(LISTAR_CANDIDATO_SQL);
+		ResultSet rs = statement.executeQuery( LISTAR_VOTANTE_SQL );
 
 		while (rs.next()) {
 			

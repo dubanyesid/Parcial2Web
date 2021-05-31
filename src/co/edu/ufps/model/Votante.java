@@ -6,16 +6,15 @@ public class Votante {
 	private String nombre;
 	private String email;
 	private String documento;
-	private TipoDocumento tipoDocumento;
-	private Eleccion eleccion;
+	private int tipoDocumento;
+	private int eleccion;
 	public Votante() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Votante(Integer id, String nombre, String email, String documento, TipoDocumento tipoDocumento,
-			Eleccion eleccion) {
+	public Votante( String nombre, String email, String documento, int tipoDocumento,
+			int eleccion) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.documento = documento;
@@ -46,16 +45,16 @@ public class Votante {
 	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
-	public TipoDocumento getTipoDocumento() {
+	public int getTipoDocumento() {
 		return tipoDocumento;
 	}
-	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+	public void setTipoDocumento(int tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	public Eleccion getEleccion() {
+	public int getEleccion() {
 		return eleccion;
 	}
-	public void setEleccion(Eleccion eleccion) {
+	public void setEleccion(int eleccion) {
 		this.eleccion = eleccion;
 	}
 	
