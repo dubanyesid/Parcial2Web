@@ -28,7 +28,7 @@
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color: #38C953">
+			style="background-color: red">
 			<div>
 				<a href="https://www.javaguides.net" class="navbar-brand"><h1>Registrar
 						Candidato</h1> Candidatos Management App </a>

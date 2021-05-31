@@ -20,10 +20,10 @@ import co.edu.ufps.dao.*;
 @WebServlet({"/Votante","/"})
 public class VotanteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private GenericDao newvotante;
-	private GenericDao newEstamento;
-	private GenericDao newTipo;
-	private GenericDao newEleccion;
+	private GenericDao nVotante;
+	private GenericDao nEstamento;
+	private GenericDao nTipo;
+	private GenericDao nEleccion;
 	
 
     public VotanteController() {
@@ -62,13 +62,13 @@ public class VotanteController extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("votante.jsp");
 
-		List<Estamento> e = newEstamento.list();
+		List<Estamento> e = nEstamento.list();
 		request.setAttribute("e", e);
 		
-		List<TipoDocumento> tipo = newTipo.list();
+		List<TipoDocumento> tipo = nTipo.list();
 		request.setAttribute("tipo", tipo);
 		
-		List<Eleccion> elec = newEleccion.list();
+		List<Eleccion> elec = nEleccion.list();
 		request.setAttribute("elec", elec);
 		
 		dispatcher.forward(request, response);
@@ -84,7 +84,7 @@ public class VotanteController extends HttpServlet {
 
 		Votante votante = new Votante(nombre, email, documento, tipodocumento, eleccion);
 
-		newvotante.insertar(votante);
+		nVotante.insertar(votante);
 		response.sendRedirect("list");
 	}
 
@@ -92,16 +92,16 @@ public class VotanteController extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		Votante votante =  (Votante) newvotante.buscar(id);
+		Votante votante =  (Votante) nVotante.buscar(id);
 		
 		//*****
-		List<Estamento> e = newEstamento.list();
+		List<Estamento> e = nEstamento.list();
 		request.setAttribute("estamento", e);
 		
-		List<TipoDocumento> tipo = newTipo.list();
+		List<TipoDocumento> tipo = nTipo.list();
 		request.setAttribute("tipoDocumento", tipo);
 		
-		List<Eleccion> elec = newEleccion.list();
+		List<Eleccion> elec = nEleccion.list();
 		request.setAttribute("eleccion", elec);
 		
 		request.setAttribute("Votante", votante);
@@ -121,7 +121,7 @@ public class VotanteController extends HttpServlet {
 
 		Votante votante = new Votante(nombre, email, documento, tipodocumento, eleccion);
 
-		newvotante.actualizar(votante);
+		nVotante.actualizar(votante);
 		response.sendRedirect("list");
 	}
 
@@ -129,13 +129,13 @@ public class VotanteController extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		newvotante.eliminar(id);
+		nVotante.eliminar(id);
 		response.sendRedirect("list");
 	}
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
 		
-		List<Votante> listV = newvotante.list();
+		List<Votante> listV = nVotante.list();
 
 		request.setAttribute("listV", listV);
 		
