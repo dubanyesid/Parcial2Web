@@ -1,6 +1,8 @@
 package co.edu.ufps.model;
 
-public class Candidato {
+import java.io.Serializable;
+
+public class Candidato implements Serializable {
 	
 	private Integer id;
 	private String documento;
@@ -13,6 +15,18 @@ public class Candidato {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Candidato(Integer id, String documento, String nombre, String apellido, Integer eleccion, Integer numero) {
+		super();
+		this.id = id;
+		this.documento = documento;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.eleccion = eleccion;
+		this.numero = numero;
+	}
+
 
 	public Integer getId() {
 		return id;
