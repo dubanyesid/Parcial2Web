@@ -41,7 +41,7 @@
 
 				<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
 					class="btn btn-success">Registrar nuevo Candidato</a> <a
-					href="<%=request.getContextPath()%>/vistaCandidato?action=mostrar"
+					href="<%=request.getContextPath()%>/CandidatoController?action=mostrar"
 					class="btn btn-success">Mostrar listado de Candidatos</a>
 			</div>
 			<br>

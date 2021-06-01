@@ -2,16 +2,18 @@ package co.edu.ufps.util;
 
 public class ConexionFactory {
 
-	public ConexionFact getConexion(String tipo) {
-		
-		switch(tipo.toUpperCase()) {
-		case "MYSQL":
-			return new ConexionMySQL();
-		case "POSTGRESQL":
-			return new ConexionPostgreSQL();
-		default:
-			return null;
+	static String tipo = "postgresql";
+
+	
+
+	public static ConexionFact getConexion() {
+		if (tipo.contentEquals("postgresql")) {
+			return  ConexionPostgreSQL.getConexion();
+		} else if (tipo.contentEquals("mysql")) {
+			return  ConexionMysql.getConexion();
 		}
+
+		return null;
 	}
 
 }

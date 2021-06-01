@@ -19,7 +19,7 @@ import co.edu.ufps.model.Candidato;
 /**
  * Servlet implementation class CandidatoController
  */
-@WebServlet({ "/CandidatoController", "/Candidato" })
+@WebServlet({ "/CandidatoController", "/Candidato"})
 public class CandidatoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CandidatoDao candidatoDao;
@@ -40,11 +40,11 @@ public class CandidatoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Servlet Candidato");
+		/*System.out.println("Servlet Candidato");
 		System.out.println(request);
-		System.out.println(response);
+		System.out.println(response);*/
 		String action = request.getParameter("action");
-		System.out.println("action");
+		System.out.println(action);
 		try {
 			switch (action) {
 			case "index":
@@ -57,6 +57,7 @@ public class CandidatoController extends HttpServlet {
 				registrar(request, response);
 				break;
 			case "mostrar":
+				System.out.println("Ingreso metodo mostrar");
 				mostrar(request, response);
 				break;
 			case "showedit":
@@ -77,6 +78,13 @@ public class CandidatoController extends HttpServlet {
 
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("Servlet Candidato");
+		doGet(request, response);
+	}
+
 	private void index(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		// mostrar(request, response);
@@ -86,8 +94,12 @@ public class CandidatoController extends HttpServlet {
 
 	private void registrar(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		Candidato c = new Candidato(Integer.parseInt(request.getParameter("id")), request.getParameter("documento"), request.getParameter("nombre"),
-				request.getParameter("apellido"),Integer.parseInt(request.getParameter("eleccion")),Integer.parseInt(request.getParameter("numero")));
+		
+		Integer eleccion = Integer.parseInt(request.getParameter("eleccion").split(" - ")[0]);
+		Integer id = candidatoDao.buscarIDUltimo();
+		
+		Candidato c = new Candidato(id+1, request.getParameter("documento"), request.getParameter("nombre"), 
+				request.getParameter("apellido"), eleccion, Integer.parseInt(request.getParameter("numero")));
 		candidatoDao.insertar(c);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("indexCandidatos.jsp");
 		dispatcher.forward(request, response);
@@ -109,7 +121,7 @@ public class CandidatoController extends HttpServlet {
 
 	private void showEditor(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		Candidato c = candidatoDao.buscar(Integer.parseInt(request.getParameter("id")));
+		Candidato c= candidatoDao.buscar(Integer.parseInt(request.getParameter("id")));
 		request.setAttribute("candidato", c);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("vistaCandidato/editar.jsp");
@@ -118,8 +130,8 @@ public class CandidatoController extends HttpServlet {
 
 	private void editar(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		Candidato c = new Candidato(Integer.parseInt(request.getParameter("id")), request.getParameter("documento"), request.getParameter("nombre"),
-				request.getParameter("apellido"),Integer.parseInt(request.getParameter("eleccion")),Integer.parseInt(request.getParameter("numero")));
+		Candidato c = new Candidato(Integer.parseInt(request.getParameter("id")), request.getParameter("documento"), request.getParameter("nombre"), 
+				request.getParameter("apellido"), Integer.parseInt(request.getParameter("eleccion")), Integer.parseInt(request.getParameter("numero")));
 		candidatoDao.actualizar(c);
 		index(request, response);
 	}
@@ -128,17 +140,9 @@ public class CandidatoController extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		Candidato c = candidatoDao.buscar(Integer.parseInt(request.getParameter("id")));
 		candidatoDao.eliminar(c.getId());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("indexCandidato.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("indexCandidatos.jsp");
 		dispatcher.forward(request, response);
 
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

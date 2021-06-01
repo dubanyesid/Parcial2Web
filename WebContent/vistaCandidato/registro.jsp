@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@page import="co.edu.ufps.model.*"%>
+<%@page import="co.edu.ufps.dao.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -41,7 +42,7 @@
 	<div id="botones" class="container text-left">
 		
 		<a href="<%=request.getContextPath()%>/CandidatoController?action=index" class="btn btn-success">Ir al
-			menú</a> <a href="<%=request.getContextPath()%>/CandidatoController/mostrar.jsp"
+			menú</a> <a href="<%=request.getContextPath()%>/vistaCandidato/mostrar.jsp"
 			class="btn btn-success">Listar Candidato</a>
 	</div>
 
@@ -50,8 +51,8 @@
 			<div class="card-body">
 				<form action="${pageContext.request.contextPath}/CandidatoController?action=register" method="post">
 					<div class="form-group">
-						<label for="validation01">Id</label> <input type="number"
-							class="form-control" placeholder="Id" name="id" >
+						<label for="validation01">ID</label> <input type="text"
+							class="form-control" placeholder="id" name="id">
 					</div>
 					<div class="form-group">
 						<label for="validation01">Documento</label> <input type="text"
@@ -64,15 +65,16 @@
 					<div class="form-group">
 						<label for="validation01">Apellido</label> <input type="text"
 							class="form-control" placeholder="Apellido" name="apellido">
-					</div>
-					<div class="form-group">
+					</div> 
+						<div class="form-group">
 						<label for="validation01">Elección</label> <input type="text"
-							class="form-control" placeholder="Elección" name="eleccion">
+							class="form-control" placeholder="Eleccion" name="eleccion">
 					</div>
-					<div class="form-group">
-						<label for="validation01">Número</label> <input type="text"
-							class="form-control" placeholder="Número" name="numero">
+						<div class="form-group">
+						<label for="validation01">Numero</label> <input type="number"
+							class="form-control" placeholder="Numero" name="numero">
 					</div>
+					
 						<input type="submit" class="btn btn-success" value="Agregar"
 							name="agregar">
 					

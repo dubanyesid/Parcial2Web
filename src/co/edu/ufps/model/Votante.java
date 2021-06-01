@@ -12,9 +12,10 @@ public class Votante {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Votante( String nombre, String email, String documento, int tipoDocumento,
+	public Votante( Integer id, String nombre, String email, String documento, int tipoDocumento,
 			int eleccion) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.documento = documento;

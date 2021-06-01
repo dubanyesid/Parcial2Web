@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.ufps.model.Candidato;
+import co.edu.ufps.model.Votante;
 import co.edu.ufps.util.Conexion;
 
-public class VotanteDao {
+public class VotanteDao implements GenericDao<Votante, Integer> {
 	private Conexion con;
 	private Connection conection;
 	private static final String INSERTAR_VOTANTE_SQL = "INSERT INTO votante(id,documento,nombre,apellido,eleccion,numero) VALUES (?,?,?,?,?,?)";
 	private static final String ELIMINAR_VOTANTE_SQL = "DELETE FROM votante WHERE id=?";
-	private static final String ACTUALIZAR_VOTANTE_SQL = "UPDATE votante SET documento=?,nombre=?,apellido=?,eleccion=?,numero=? WHERE id=?";
+	private static final String ACTUALIZAR_VOTANTE_SQL = "UPDATE votante SET nombre=?,email=?,documento=?,tipodocumento=?,eleccion=? WHERE id=?";
 	private static final String BUSCAR_VOTANTE_SQL = "SELECT * FROM votante WHERE id=?";
 	private static final String LISTAR_VOTANTE_SQL = "SELECT * FROM votante";
 
@@ -24,19 +25,19 @@ public class VotanteDao {
 		this.con = new Conexion();
 	}
 
-	public boolean insertar(Candidato c)throws SQLException {
+	public boolean insertar(Votante v)throws SQLException {
 		boolean rowInserted = false;
 
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
 		PreparedStatement prepared = this.conection.prepareStatement(INSERTAR_VOTANTE_SQL);
-		prepared.setInt(1, c.getId());
-		prepared.setString(2, c.getDocumento());
-		prepared.setString(3, c.getNombre());
-		prepared.setString(4, c.getApellido());
-		prepared.setInt(5, c.getEleccion());
-		prepared.setInt(6, c.getNumero());
+		prepared.setInt(1, v.getId());
+		prepared.setString(2, v.getNombre());
+		prepared.setString(3, v.getEmail());
+		prepared.setString(4, v.getDocumento());
+		prepared.setInt(5, v.getTipoDocumento());
+		prepared.setInt(6, v.getEleccion());
 
 		rowInserted = prepared.executeUpdate() > 0;
 		prepared.close();
@@ -45,20 +46,19 @@ public class VotanteDao {
 		return rowInserted;
 	}
 
-	public boolean actualizar(Candidato c)  throws SQLException {
+	public boolean actualizar(Votante v)  throws SQLException {
 		boolean rowElimined = false;
 
 		this.con.conectar();
 		this.conection = this.con.conectar();
 
 		PreparedStatement prepared = this.conection.prepareStatement( ACTUALIZAR_VOTANTE_SQL);
-		prepared.setInt(1, c.getId());
-		prepared.setString(2, c.getDocumento());
-		prepared.setString(3, c.getNombre());
-		prepared.setString(4, c.getApellido());
-		prepared.setInt(5, c.getEleccion());
-		prepared.setInt(6, c.getNumero());
-
+		prepared.setInt(1, v.getId());
+		prepared.setString(2, v.getNombre());
+		prepared.setString(3, v.getEmail());
+		prepared.setString(4, v.getDocumento());
+		prepared.setInt(5, v.getTipoDocumento());
+		prepared.setInt(6, v.getEleccion());
 		rowElimined = prepared.executeUpdate() > 0;
 		prepared.close();
 		this.con.desconectar();
@@ -66,8 +66,8 @@ public class VotanteDao {
 		return rowElimined;
 	}
 
-	public Candidato buscar(Integer id) throws SQLException {
-		Candidato e = null;
+	public Votante buscar(Integer id) throws SQLException {
+		Votante e = null;
 
 		this.con.conectar();
 		this.conection = this.con.conectar();
@@ -79,8 +79,8 @@ public class VotanteDao {
 
 		if (rs!=null && rs.next()) {
 			
-			e = new Candidato(id, rs.getString("documento"), rs.getString("nombre"), rs.getString("apellido"),
-					rs.getInt("eleccion"),rs.getInt("numero"));
+			e = new Votante(id, rs.getString("nombre"), rs.getString("email"), rs.getString("documento"),
+					rs.getInt("tipodocumento"),rs.getInt("eleccion"));
 		}
 		rs.close();
 		this.con.desconectar();
@@ -104,8 +104,8 @@ public class VotanteDao {
 		return rowElimined;
 	}
 	
-	public List<Candidato> list() throws SQLException {
-		List<Candidato> list = new ArrayList<>();
+	public List<Votante> list() throws SQLException {
+		List<Votante> list = new ArrayList<>();
 
 		this.con.conectar();
 		this.conection = this.con.conectar();
@@ -116,16 +116,16 @@ public class VotanteDao {
 		while (rs.next()) {
 			
 			Integer id = rs.getInt("id");
-			String documento = rs.getString("documento");
 			String nombre = rs.getString("nombre");
-			String apellido = rs.getString("apellido");
+			String email = rs.getString("email");
+			String documento = rs.getString("documento");
+			Integer tipoDocumento = rs.getInt("tipodocumento");
 			Integer eleccion = rs.getInt("eleccion");
-			Integer numero = rs.getInt("numero");
 			
 			
 
-			Candidato c = new Candidato(id, documento, nombre, apellido, eleccion,numero);
-			list.add(c);
+			Votante v = new Votante(id, nombre, email, documento,tipoDocumento, eleccion);
+			list.add(v);
 		}
 
 		this.con.desconectar();

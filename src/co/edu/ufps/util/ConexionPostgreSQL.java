@@ -6,79 +6,133 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+
 public class ConexionPostgreSQL implements ConexionFact {
 
-	private Connection con = null;
-	private static ConexionPostgreSQL conexion;
+	public Connection con;
 
-	/*private static final String host = "queenie.db.elephantsql.com";
-	private static final String dbName = "mnjgxshj";
-	private static final String url = "jdbc:postgresql://" + host + ":5432/" + dbName;
-	private static final String driver = "org.postgresql.Driver";
-	private static final String userName = "mnjgxshj";
-	private static final String password = "Uzjqo00sxV0W9OzPEB1q3wpoVvGMbbUV";*/
+	private static ConexionPostgreSQL db;
+
+	private PreparedStatement preparedStatement;
 	
-	private static final String host = "localhost";
-	private static final String dbName = "mnjgxshj";
-	private static final String url = "jdbc:postgresql://" + host + ":5432/" + dbName;
-	private static final String driver = "org.postgresql.Driver";
-	private static final String userName = "postgres";
-	private static final String password = "123";
+	public Statement st = null;
 
+	private ConexionPostgreSQL() {
+		
+		/*String host = "queenie.db.elephantsql.com";
+		String db = "mnjgxshj";
 
-	public ConexionPostgreSQL() {
-		this.conectar();
-	}
+		String url = "jdbc:postgresql://" + host + ":5432/" + db;
+		String user = "mnjgxshj";
+		String password = "Uzjqo00sxV0W9OzPEB1q3wpoVvGMbbUV";*/
+		
+		 String host = "kashin.db.elephantsql.com";
+		String db = "mpybktnb";
+		String url = "jdbc:postgresql://" + host + ":5432/" + db;
+		String user = "mpybktnb";
+		String password = "WhyxLHVX1nhKKGqqdEHfXNUYo4wS3HVA";
+		
+		/*String host = "mnjgxsh";
+		String db = "postgres";
 
-	@Override
-	public void conectar() {
+		String url = "jdbc:postgresql://" + host + ":5432/" + db;
+		String user = "postgres";
+		String password = "123";*/
 		try {
-			Class.forName(driver).newInstance();
-			con = (Connection) DriverManager.getConnection(url, userName, password);
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+
+		try {
+			con = DriverManager.getConnection(url, user, password);
 
 			boolean valid = con.isValid(50000);
-			System.out.println(valid ? "TEST OK" : "TEST FAIL");
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.print(valid ? "TEST OK" : "TEST FAIL");
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
+	
+	public static ConexionPostgreSQL getConexion() {
+
+		if (db == null) {
+			db = new ConexionPostgreSQL();
+		}
+		return db;
+	}
+
+
+	public ResultSet query() throws SQLException {
+		ResultSet res = preparedStatement.executeQuery();
+		return res;
+	}
+
+
+	public int execute() throws SQLException {
+		int result = preparedStatement.executeUpdate();
+		return result;
+	}
+
+	
+	public PreparedStatement setPreparedStatement(String sql) throws SQLException {
+		this.preparedStatement = con.prepareStatement(sql);
+		return this.preparedStatement;
+	}
+
 	
 	public void cerrarConexion() {
 		try {
 			con.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static ConexionPostgreSQL getConexion() {
-		if (conexion == null) {
-			conexion = new ConexionPostgreSQL();
-		}
-
-		return conexion;
 	}
 
 	public ResultSet consultar(String sql) {
 
-		Statement st;
 		try {
-			st = this.con.createStatement();
+			Statement st = this.con.createStatement();
+			ResultSet rs = st.executeQuery(sql);
 
-			ResultSet res = st.executeQuery(sql);
+			return rs;
 
-			return res;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+	}
 
+	// COMPROBAR
+	public static void main(String[] args) {
+		ConexionPostgreSQL cp = new ConexionPostgreSQL();
+
+		ResultSet r = cp.consultar("Select * from eleccion");
+		try {
+			while (r.next()) {
+				int id = r.getInt(1);
+				String nombre = r.getString("nombre");
+				Date fechainicio = r.getDate("fechainicio");
+				Date fechafin = r.getDate("fechafin");
+				String cargo = r.getString("cargo");
+				System.out.print("\n" + id + "nombre" +nombre);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		cp.cerrarConexion();
 	}
 }
-
 

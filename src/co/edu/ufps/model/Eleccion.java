@@ -1,24 +1,25 @@
 package co.edu.ufps.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Eleccion implements Serializable {
 	
 	
 	private Integer id;
 	private String nombre;
-	private String fecha;
-	private String fechaFin;
+	private Date fechainicio;
+	private Date fechaFin;
 	private String cargo;
 	public Eleccion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Eleccion(Integer id, String nombre, String fecha, String fechaFin, String cargo) {
+	public Eleccion(Integer id, String nombre, Date fechainicio, Date fechaFin, String cargo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.fecha = fecha;
+		this.fechainicio = fechainicio;
 		this.fechaFin = fechaFin;
 		this.cargo = cargo;
 	}
@@ -34,16 +35,16 @@ public class Eleccion implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getFecha() {
-		return fecha;
+	public Date getFecha() {
+		return fechainicio;
 	}
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public void setFecha(Date fecha) {
+		this.fechainicio = fecha;
 	}
-	public String getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
-	public void setFechaFin(String fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 	public String getCargo() {

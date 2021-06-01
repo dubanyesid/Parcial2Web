@@ -11,7 +11,7 @@ import java.util.List;
 import co.edu.ufps.model.Candidato;
 import co.edu.ufps.util.Conexion;
 
-public class CandidatoDao {
+public class CandidatoDao implements GenericDao<Candidato, Integer>{
 	
 	private Conexion con;
 	private Connection conection;
@@ -20,9 +20,11 @@ public class CandidatoDao {
 	private static final String ACTUALIZAR_CANDIDATO_SQL = "UPDATE candidato SET documento=?,nombre=?,apellido=?,eleccion=?,numero=? WHERE id=?";
 	private static final String BUSCAR_CANDIDATO_SQL = "SELECT * FROM candidato WHERE id=?";
 	private static final String LISTAR_CANDIDATO_SQL = "SELECT * FROM candidato";
+	private static final String BUSCAR_ULTIMO_ID_SQL = "SELECT MAX(id) FROM candidato";
 
 	public CandidatoDao() throws SQLException {
 		this.con = new Conexion();
+		
 	}
 
 	public boolean insertar(Candidato c)throws SQLException {
@@ -30,6 +32,7 @@ public class CandidatoDao {
 
 		this.con.conectar();
 		this.conection = this.con.conectar();
+		
 
 		PreparedStatement prepared = this.conection.prepareStatement(INSERTAR_CANDIDATO_SQL);
 		prepared.setInt(1, c.getId());
@@ -44,6 +47,25 @@ public class CandidatoDao {
 		this.con.desconectar();
 
 		return rowInserted;
+	}
+	public Integer buscarIDUltimo() throws SQLException {
+		Integer id=0;
+
+		this.con.conectar();
+		this.conection = this.con.conectar();
+
+		PreparedStatement prepared = this.conection.prepareStatement(BUSCAR_ULTIMO_ID_SQL);
+
+		ResultSet rs = prepared.executeQuery();
+
+		if (rs!=null && rs.next()) {
+			
+			id=Integer.parseInt(rs.getString(1));
+		}
+		rs.close();
+		this.con.desconectar();
+
+		return id;
 	}
 
 	public boolean actualizar(Candidato c)  throws SQLException {
@@ -107,13 +129,15 @@ public class CandidatoDao {
 	
 	public List<Candidato> list() throws SQLException {
 		List<Candidato> list = new ArrayList<>();
-
+		
 		this.con.conectar();
+		System.out.println(conection);
 		this.conection = this.con.conectar();
+		
 
 		Statement statement = this.conection.createStatement();
 		ResultSet rs = statement.executeQuery(LISTAR_CANDIDATO_SQL);
-
+		
 		while (rs.next()) {
 			
 			Integer id = rs.getInt("id");

@@ -86,39 +86,7 @@
 
 	
     <style>
-footer {
-    padding: 5px;
-    background-color: #38C953;
-    margin-top:20px;
-}
 
-footer p,b{
-    text-align: center;
-    color: white;
-}
-.container{
-	width:60%;
-
-}
-
-form {
-	margin: auto;
-	display: block;
-	width: 90%;
-	border-radius: 10px;
-}
-
-#botones{
-	margin:15px;
-}
-
-form input {
-	width: 90%;
-}
-
-form input[type=submit]{
-	width:100%;
-}
 
 </style>
 </body>
