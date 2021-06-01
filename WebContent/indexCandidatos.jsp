@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +18,8 @@
 <body>
 
 	<header>
-		<nav id = "menu"class="navbar navbar-expand-md navbar-dark"
-			style="background-color: #38C953">
+		<nav class="navbar navbar-expand-md navbar-dark"
+			style="background-color: #38C953" id="containerTitulos">
 			<div>
 				<a href="https://www.javaguides.net" class="navbar-brand"><h1>Administrar
 			Candidatos</h1> Candidatos Management App </a>
@@ -29,10 +29,10 @@
 
 	<div class="container">
 		<hr>
-		<div id="botones" class="container text-left">
+		<div id="botones" class="container text-left containerMenus">
 			<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
-					class="btn btn-success">Añadir nuevo Candidato</a> 
-			<a href="<%=request.getContextPath()%>/CandidatoController?action=mostrar" class="btn btn-success">Mostrar listado de Candidatos</a>
+					class="btn btn-success containerMenu">AÃ±adir nuevo Candidato</a> 
+			<a href="<%=request.getContextPath()%>/CandidatoController?action=mostrar" class="btn btn-success containerMenu">Mostrar listado de Candidatos</a>
 		</div>
 	</div>
 

@@ -23,7 +23,7 @@
 
 			<ul class="navbar-nav">
 				<!--request.getContextPath() llama a la acción del servlet a ejecutar /action  -->
-				<li><a href="<%=request.getContextPath()%>/list" class="nav-link">Votantes </a></li>
+				<li><a href="<%=request.getContextPath()%>/VotanteController?action=list" class="nav-link">Votantes </a></li>
 			</ul>
 		</nav>
 	</header>
@@ -36,7 +36,7 @@
 			<hr>
 			
 			<div class="container text-left">
-				<a href="<%=request.getContextPath()%>/new" class="btn" style="background-color:blue">Nuevo Votante</a>
+				<a href="<%=request.getContextPath()%>/votante.jsp" class="btn" style="background-color:blue">Nuevo Votante</a>
 			</div>
 			
 			<br>
@@ -60,12 +60,12 @@
 							<td><c:out value="${votante.nombre}" /></td>
 							<td><c:out value="${votante.email}" /></td>
 							<td><c:out value="${votante.documento}" /></td>
-							<td><c:out value="${votante.tipodocumento}" /></td>
+							<td><c:out value="${votante.tipoDocumento}" /></td>
 							<td><c:out value="${votante.eleccion}" /></td>
 							<td>
-								<a href="edit?id=<c:out value='${votante.id}' />">Edit</a>
+								<a href="<%=request.getContextPath()%>/VotanteController?action=edit&id=<c:out value='${votante.id}' />">Edit</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; 
-								<a href="delete?id=<c:out value='${votante.id}' />">Delete</a>
+								<a href="<%=request.getContextPath()%>/VotanteController?action=delete&id=<c:out value='${votante.id}' />">Delete</a>
 							</td>
 						</tr>
 					</c:forEach>

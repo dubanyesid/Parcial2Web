@@ -17,7 +17,7 @@ import co.edu.ufps.dao.*;
 /**
  * Servlet implementation class Votante
  */
-@WebServlet("/Votante")
+@WebServlet("/VotanteController")
 public class VotanteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private VotanteDao votanteDao;
@@ -67,15 +67,6 @@ public class VotanteController extends HttpServlet {
 	}
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("votante.jsp");
-
-		List<Estamento> e = estamentoDao.list();
-		request.setAttribute("e", e);
-		
-		List<TipoDocumento> tipo = tipodocumentoDao.list();
-		request.setAttribute("tipo", tipo);
-		
-		List<Eleccion> elec = eleccionDao.list();
-		request.setAttribute("elec", elec);
 		
 		dispatcher.forward(request, response);
 	}
@@ -140,12 +131,9 @@ public class VotanteController extends HttpServlet {
 	}
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, SQLException, IOException {
-		
-		List<Votante> listV = votanteDao.list();
-
-		request.setAttribute("listV", listV);
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("listVotante.jsp");
+		List<Votante> listV = votanteDao.list();
+		request.setAttribute("listV", listV);
 		dispatcher.forward(request, response);
 	}
 

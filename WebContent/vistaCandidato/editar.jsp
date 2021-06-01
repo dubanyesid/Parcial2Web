@@ -22,7 +22,7 @@
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color: red">
+			style="background-color: red" id="containerTitulos">
 			<div>
 				<a href="https://www.javaguides.net" class="navbar-brand"><h1>Actualizar
 						Candidato</h1> Candidato Management App </a>
@@ -32,13 +32,14 @@
 
 	<hr>
 	<div id="botones" class="container text-left">
-		
-		<a href="<%=request.getContextPath()%>/CandidatoController?action=index" class="btn btn-success">Ir al
-			menú</a> 			
-		<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
-					class="btn btn-success">Registrar nuevo Candidato</a>
-		<a href="<%=request.getContextPath()%>/vistaCandidato/mostrar.jsp"
-			class="btn btn-success">Listar Candidatos</a>
+		<div id="containerMenus">
+			<a href="<%=request.getContextPath()%>/CandidatoController?action=index" class="btn btn-success containerMenu">Ir al
+				menï¿½</a> 			
+			<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
+						class="btn btn-success containerMenu">Registrar nuevo Candidato</a>
+			<a href="<%=request.getContextPath()%>/vistaCandidato/mostrar.jsp"
+				class="btn btn-success containerMenu">Listar Candidatos</a>
+		</div>
 	</div>
 
 	<div class="container">
@@ -67,16 +68,16 @@
 							placeholder="Apellido" name="apellido">
 					</div>
 					<div class="form-group">
-						<label for="validation01">Elección</label> <input type="text"
+						<label for="validation01">ElecciÃ³n</label> <input type="text"
 							class="form-control" value='<c:out value="${candidato.eleccion}"></c:out>'
 							placeholder="Eleccion" name="eleccion">
 					</div>
 					<div class="form-group">
-						<label for="validation01">Número</label> <input type="text"
+						<label for="validation01">NÃºmero</label> <input type="text"
 							class="form-control" value='<c:out value="${candidato.numero}"></c:out>'
-							placeholder="Número" name="numero">
+							placeholder="Nï¿½mero" name="numero">
 					</div>			
-						<input type="submit" class="btn btn-success" value="Guardar"
+						<input type="submit" class="btn btn-success btnFinal" value="Guardar"
 							name="guardar">
 					
 				</form>

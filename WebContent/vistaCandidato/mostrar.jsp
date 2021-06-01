@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
 
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color: red">
+			style="background-color: red" id="containerTitulos">
 			<div>
 				<a href="https://www.javaguides.net" class="navbar-brand"><h1>Listar
 						Cantidatos</h1> Candidatos Management App </a>
@@ -39,21 +39,24 @@
 			<hr>
 			<div class="container text-left">
 
-				<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
-					class="btn btn-success">Registrar nuevo Candidato</a> <a
-					href="<%=request.getContextPath()%>/CandidatoController?action=mostrar"
-					class="btn btn-success">Mostrar listado de Candidatos</a>
+				<div id="containerMenus">
+					<a href="<%=request.getContextPath()%>/vistaCandidato/registro.jsp"
+						class="btn btn-success containerMenu">Registrar nuevo Candidato</a> 
+					<a href="<%=request.getContextPath()%>/CandidatoController?action=mostrar"
+						class="btn btn-success containerMenu">Mostrar listado de Candidatos</a>
+				</div>
+
 			</div>
 			<br>
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<td>ID</td>
-						<td>DOCUMENTO</td>
-						<td>NOMBRE</td>
-						<td>APELLIDO</td>
-						<td>ELECCIÓN</td>
-						<td>NÚMERO</td>
+						<td class="campos">ID</td>
+						<td class="campos">DOCUMENTO</td>
+						<td class="campos">NOMBRE</td>
+						<td class="campos">APELLIDO</td>
+						<td class="campos">ELECCIÃ“N</td>
+						<td class="campos">NÃšMERO</td>
 
 					</tr>
 				</thead>
@@ -67,9 +70,9 @@
 							<td><c:out value="${candidato.apellido}" /></td>
 							<td><c:out value="${candidato.eleccion}" /></td>
 							<td><c:out value="${candidato.numero}" /></td>
-							<td><a
-								href="<%=request.getContextPath()%>/CandidatoController?action=showedit&id=<c:out value="${candidato.id}" />">Editar</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-								href="CandidatoController?action=eliminar&id=<c:out value="${candidato.id}"/>">Eliminar</a>
+							<td>
+								<a class="links" href="<%=request.getContextPath()%>/CandidatoController?action=showedit&id=<c:out value="${candidato.id}" />">Editar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a class="links" href="CandidatoController?action=eliminar&id=<c:out value="${candidato.id}"/>">Eliminar</a>
 							</td>
 
 						</tr>
